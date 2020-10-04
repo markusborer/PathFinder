@@ -68,4 +68,8 @@ public class Labyrinth {
 		window.repaint();
 	}
 
+	void setTitle(String title) {
+		window.setTitle(title);
+	}
+
 }

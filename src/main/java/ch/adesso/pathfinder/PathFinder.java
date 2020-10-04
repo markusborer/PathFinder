@@ -15,9 +15,12 @@ class PathFinder {
 	}
 
 	void findPath(PathFinderLogic pathFinderLogic) {
+		int steps = 0;
 		DIRECTIONS direction = DIRECTIONS.RIGHT;
 		Point position = new Point(labyrinth.getStart());
 		do {
+			steps++;
+			labyrinth.setTitle("Searching " + steps + " steps");
 			direction = pathFinderLogic.getNewDirection(labyrinth, position, direction);
 			position = pathFinderLogic.getNewPosition(position, direction);
 			labyrinth.paintLine(position);
@@ -27,6 +30,7 @@ class PathFinder {
 				// Do nothing
 			}
 		} while (!position.equals(labyrinth.getEnd()));
+		labyrinth.setTitle("Solved after " + steps + " steps");
 	}
 
 }
