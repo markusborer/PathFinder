@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.*;
 
-public class Window extends JFrame {
+class Window extends JFrame {
 
 	private static final int PIXEL_SIZE = 5;
 
@@ -13,7 +13,7 @@ public class Window extends JFrame {
 	private int height;
 	private BufferedImage image;
 
-	public Window(int width, int height) {
+	Window(int width, int height) {
 		super();
 		this.width = width * PIXEL_SIZE;
 		this.height = height * PIXEL_SIZE;
@@ -36,7 +36,7 @@ public class Window extends JFrame {
 		setVisible(true);
 	}
 
-	public void setColor(Point point, int[] color) {
+	void setColor(Point point, int[] color) {
 		for (int xOffset = 0; xOffset < PIXEL_SIZE; xOffset++) {
 			for (int yOffset = 0; yOffset < PIXEL_SIZE; yOffset++) {
 				image.getRaster().setPixel(point.x * PIXEL_SIZE + xOffset, point.y * PIXEL_SIZE + yOffset, color);

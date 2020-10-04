@@ -1,14 +1,12 @@
 package ch.adesso.pathfinder;
 
-import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 
 public class Labyrinth {
 
-	static final char BORDER_CHARACTER = 'X';
+	private static final char BORDER_CHARACTER = 'X';
 	static final char START_CHARACTER = 'S';
-	static final char END_CHARACTER = 'E';
+	private static final char END_CHARACTER = 'E';
 
 	private static final int[] EMPTY_COLOR = new int[] { 0xFF, 0xFF, 0xFF };
 	private static final int[] BORDER_COLOR = new int[] { 0x00, 0x00, 0x00 };
@@ -28,7 +26,7 @@ public class Labyrinth {
 		this.window = window;
 	}
 
-	public void initLabyrinth(String pattern, int width, int height) {
+	void initLabyrinth(String pattern, int width, int height) {
 		labyrinth = new int[width][height];
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
@@ -53,19 +51,19 @@ public class Labyrinth {
 		window.repaint();
 	}
 
-	public Point getStart() {
+	Point getStart() {
 		return start;
 	}
 
-	public Point getEnd() {
+	Point getEnd() {
 		return end;
 	}
 
-	public boolean isEmpty(Point point) {
+	boolean isEmpty(Point point) {
 		return labyrinth[point.x][point.y] == EMPTY;
 	}
 
-	public void paintLine(Point position) {
+	void paintLine(Point position) {
 		window.setColor(position, Labyrinth.LINE_COLOR);
 		window.repaint();
 	}

@@ -2,8 +2,8 @@ package ch.adesso.pathfinder;
 
 public class Main {
 
-	static final int WIDTH = 100;
-	static final int HEIGHT = 100;
+	private static final int WIDTH = 100;
+	private static final int HEIGHT = 100;
 
 	public static void main(String[] args) {
 		try {
@@ -155,21 +155,21 @@ public class Main {
 			"X                      X                          X          XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX      X"+
 			"X                      XXXXXXXXXXXXXXXXXXXXXXXXXXXX          X                                     X"+
 			"X                                                            X                                     X"+
-			"X                                                            X                                     X"+
-			"X                                                 X                                                X"+
-			"X                                                 X                                                X"+
-			"X                                                 X                                                X"+
-			"S                                                 X                                                X"+
-			"X          XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX          X                                     X"+
-			"X                                                            X                                     X"+
-			"X                                                            X                                     X"+
-			"X                                                            X                                     X"+
-			"X   XXXXXXXX                                                 X                                     X"+
+			"X                 X             XXXXXXXXXX                   X                                     X"+
+			"S                 X             X        X        X                                                X"+
+			"X                 X             X        X        X                                                X"+
+			"X          XXXXXXXX             X        X        X                                                X"+
+			"X                                        X        X                                                X"+
+			"X                                        X    XXXXX          X                                     X"+
+			"X                                        X                   X                                     X"+
+			"X                               XXXXX    X                   X                                     X"+
+			"X                               X   X    X                   X                                     X"+
+			"X   XXXXXXXX                    X        X                   X                                     X"+
+			"X   X      X                    X        X                   X                                     X"+
+			"X   X      X                    X        X                   X        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"+
+			"X   X      X                    XXXXXXXXXX                   X                                     X"+
 			"X   X      X                                                 X                                     X"+
-			"X   X      X                                                 X        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"+
 			"X   X      X     XXXXXXXXXXXXXXXXXXXXXXXXX                   X                                     X"+
-			"X   X      X     X                                           X                                     X"+
-			"X   X      X     X                                           X                                     X"+
 			"X   X      X     X                                           X                                     X"+
 			"X   X      X     X                 X                         X                                     X"+
 			"X   X            X                 X                         XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX     X"+

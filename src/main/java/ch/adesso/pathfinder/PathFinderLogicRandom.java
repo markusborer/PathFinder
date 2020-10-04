@@ -12,14 +12,14 @@ Dennoch erreicht man diesen immer.
  */
 public class PathFinderLogicRandom implements PathFinderLogic {
 
-	public Random random = new Random();
+	Random random = new Random();
 
 	@Override
 	public DIRECTIONS getNewDirection(Labyrinth labyrinth, Point position, DIRECTIONS oldDirection) {
-		DIRECTIONS left = oldDirection;
-		DIRECTIONS forward = oldDirection;
-		DIRECTIONS right = oldDirection;
-		DIRECTIONS backward = oldDirection;
+		DIRECTIONS left = null;
+		DIRECTIONS forward = null;
+		DIRECTIONS right = null;
+		DIRECTIONS backward = null;
 		switch (oldDirection) {
 			case RIGHT:
 				left = DIRECTIONS.UP;
