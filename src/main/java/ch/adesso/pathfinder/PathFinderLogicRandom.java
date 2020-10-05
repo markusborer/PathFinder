@@ -1,6 +1,8 @@
 package ch.adesso.pathfinder;
 
 import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /*
@@ -16,56 +18,47 @@ public class PathFinderLogicRandom implements PathFinderLogic {
 
 	@Override
 	public DIRECTIONS getNewDirection(Labyrinth labyrinth, Point position, DIRECTIONS oldDirection) {
-		DIRECTIONS left = null;
-		DIRECTIONS forward = null;
-		DIRECTIONS right = null;
+		List<DIRECTIONS> directions = new ArrayList<>();
 		DIRECTIONS backward = null;
 		switch (oldDirection) {
 			case RIGHT:
-				left = DIRECTIONS.UP;
-				forward = DIRECTIONS.RIGHT;
-				right = DIRECTIONS.DOWN;
+				addIfEmpty(labyrinth, position, directions, DIRECTIONS.UP);
+				addIfEmpty(labyrinth, position, directions, DIRECTIONS.RIGHT);
+				addIfEmpty(labyrinth, position, directions, DIRECTIONS.DOWN);
 				backward = DIRECTIONS.LEFT;
 				break;
 			case LEFT:
-				left = DIRECTIONS.DOWN;
-				forward = DIRECTIONS.LEFT;
-				right = DIRECTIONS.UP;
+				addIfEmpty(labyrinth, position, directions, DIRECTIONS.DOWN);
+				addIfEmpty(labyrinth, position, directions, DIRECTIONS.LEFT);
+				addIfEmpty(labyrinth, position, directions, DIRECTIONS.UP);
 				backward = DIRECTIONS.RIGHT;
 				break;
 			case UP:
-				left = DIRECTIONS.LEFT;
-				forward = DIRECTIONS.UP;
-				right = DIRECTIONS.RIGHT;
+				addIfEmpty(labyrinth, position, directions, DIRECTIONS.LEFT);
+				addIfEmpty(labyrinth, position, directions, DIRECTIONS.UP);
+				addIfEmpty(labyrinth, position, directions, DIRECTIONS.RIGHT);
 				backward = DIRECTIONS.DOWN;
 				break;
 			case DOWN:
-				left = DIRECTIONS.RIGHT;
-				forward = DIRECTIONS.DOWN;
-				right = DIRECTIONS.LEFT;
+				addIfEmpty(labyrinth, position, directions, DIRECTIONS.RIGHT);
+				addIfEmpty(labyrinth, position, directions, DIRECTIONS.DOWN);
+				addIfEmpty(labyrinth, position, directions, DIRECTIONS.LEFT);
 				backward = DIRECTIONS.UP;
 				break;
 		}
-		boolean leftIsEmpty = labyrinth.isEmpty(getNewPosition(position, left));
-		boolean forwardIsEmpty = labyrinth.isEmpty(getNewPosition(position, forward));
-		boolean rightIsEmpty = labyrinth.isEmpty(getNewPosition(position, right));
-		if (!leftIsEmpty && !forwardIsEmpty && !rightIsEmpty) {
+		if (directions.size() == 0) {
 			return backward;
+		} else if (directions.size() == 1) {
+			return directions.get(0);
+		} else {
+			int randomDirection = random.nextInt(directions.size());
+			return directions.get(randomDirection);
 		}
-		if (!leftIsEmpty && forwardIsEmpty && !rightIsEmpty) {
-			return forward;
-		}
-		while (true) {
-			int randomDirection = random.nextInt(3);
-			if (randomDirection == 0 && leftIsEmpty) {
-				return left;
-			}
-			if (randomDirection == 1 && forwardIsEmpty) {
-				return forward;
-			}
-			if (randomDirection == 2 && rightIsEmpty) {
-				return right;
-			}
+	}
+
+	private void addIfEmpty(Labyrinth labyrinth, Point position, List<DIRECTIONS> directions, DIRECTIONS direction) {
+		if (labyrinth.isEmpty(getNewPosition(position, direction))) {
+			directions.add(direction);
 		}
 	}
 
