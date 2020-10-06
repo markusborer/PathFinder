@@ -18,47 +18,32 @@ public class PathFinderLogicRandom implements PathFinderLogic {
 
 	@Override
 	public DIRECTIONS getNewDirection(Labyrinth labyrinth, Point position, DIRECTIONS oldDirection) {
-		List<DIRECTIONS> directions = new ArrayList<>();
-		DIRECTIONS backward = null;
-		switch (oldDirection) {
-			case RIGHT:
-				addIfEmpty(labyrinth, position, directions, DIRECTIONS.UP);
-				addIfEmpty(labyrinth, position, directions, DIRECTIONS.RIGHT);
-				addIfEmpty(labyrinth, position, directions, DIRECTIONS.DOWN);
-				backward = DIRECTIONS.LEFT;
-				break;
-			case LEFT:
-				addIfEmpty(labyrinth, position, directions, DIRECTIONS.DOWN);
-				addIfEmpty(labyrinth, position, directions, DIRECTIONS.LEFT);
-				addIfEmpty(labyrinth, position, directions, DIRECTIONS.UP);
-				backward = DIRECTIONS.RIGHT;
-				break;
-			case UP:
-				addIfEmpty(labyrinth, position, directions, DIRECTIONS.LEFT);
-				addIfEmpty(labyrinth, position, directions, DIRECTIONS.UP);
-				addIfEmpty(labyrinth, position, directions, DIRECTIONS.RIGHT);
-				backward = DIRECTIONS.DOWN;
-				break;
-			case DOWN:
-				addIfEmpty(labyrinth, position, directions, DIRECTIONS.RIGHT);
-				addIfEmpty(labyrinth, position, directions, DIRECTIONS.DOWN);
-				addIfEmpty(labyrinth, position, directions, DIRECTIONS.LEFT);
-				backward = DIRECTIONS.UP;
-				break;
+		DIRECTIONS backward = DIRECTIONS.UP;
+		if (oldDirection == DIRECTIONS.RIGHT) {
+			backward = DIRECTIONS.LEFT;
+		} else if (oldDirection == DIRECTIONS.LEFT) {
+			backward = DIRECTIONS.RIGHT;
+		} else if (oldDirection == DIRECTIONS.UP) {
+			backward = DIRECTIONS.DOWN;
 		}
+		List<DIRECTIONS> directions = new ArrayList<>();
+		addIfEmpty(labyrinth, position, directions, backward, DIRECTIONS.UP);
+		addIfEmpty(labyrinth, position, directions, backward, DIRECTIONS.RIGHT);
+		addIfEmpty(labyrinth, position, directions, backward, DIRECTIONS.DOWN);
+		addIfEmpty(labyrinth, position, directions, backward, DIRECTIONS.LEFT);
 		if (directions.size() == 0) {
 			return backward;
-		} else if (directions.size() == 1) {
-			return directions.get(0);
 		} else {
 			int randomDirection = random.nextInt(directions.size());
 			return directions.get(randomDirection);
 		}
 	}
 
-	private void addIfEmpty(Labyrinth labyrinth, Point position, List<DIRECTIONS> directions, DIRECTIONS direction) {
-		if (labyrinth.isEmpty(getNewPosition(position, direction))) {
-			directions.add(direction);
+	private void addIfEmpty(Labyrinth labyrinth, Point position, List<DIRECTIONS> directions, DIRECTIONS backward, DIRECTIONS direction) {
+		if (backward != direction) {
+			if (labyrinth.isEmpty(getNewPosition(position, direction))) {
+				directions.add(direction);
+			}
 		}
 	}
 

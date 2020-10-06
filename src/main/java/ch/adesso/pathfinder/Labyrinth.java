@@ -33,7 +33,7 @@ public class Labyrinth {
 				char character = pattern.charAt(x + y * width);
 				if (character == START_CHARACTER) {
 					start = new Point(x, y);
-					labyrinth[x][y] = NOT_EMPTY;
+					labyrinth[x][y] = EMPTY;
 					window.setColor(start, START_COLOR);
 				} else if (character == END_CHARACTER) {
 					end = new Point(x, y);

@@ -69,7 +69,7 @@ public class Main {
 			"X X X XXX X X XXXXX X XXXXXXX XXX XXX XXXXX X XXXXXXXXXX XXXXX X XXXXXXX XXX XXX XXXXX X XXXXXXXXX X" +
 			"X X X     X   X X   X X     X     X       X X   X     X  X X   X X     X     X       X X   X     X X" +
 			"X X XXXXXXX XXX X XXXXX XXX XXXXXXX XXXXX X XXX X XXX X XX X XXXXX XXX XXXXXXX XXXXX X XXX X XXX X X" +
-			"S X X         X X       X X       X   X   X   X   X X    X X       X X       X   X   X   X   X X   E" +
+			"XSX X         X X       X X       X   X   X   X   X X    X X       X X       X   X   X   X   X X   E" +
 			"X X XXXXXXX X X XXXXXXXXX XXXXX XXXXX X XXX XXXXXXX XXXX X XXXXXXXXX XXXXX XXXXX X XXX XXXXXXX XXX X" +
 			"X X X     XXX   X         X     X     X X   X          XXX X         X     X     X X   X           X" +
 			"X X X XXX X XXX X X X XXXXX XXXXX XXXXX XXXXX XXXXXXXXXX X X X X XXXXX XXXXX XXXXX XXXXX XXXXXXXXXXX" +
@@ -156,7 +156,7 @@ public class Main {
 			"X                      XXXXXXXXXXXXXXXXXXXXXXXXXXXX          X                                     X"+
 			"X                                                            X                                     X"+
 			"X                 X             XXXXXXXXXX                   X                                     X"+
-			"S                 X             X        X        X                                                X"+
+			"XS                X             X        X        X                                                X"+
 			"X                 X             X        X        X                                                X"+
 			"X          XXXXXXXX             X        X        X                                                X"+
 			"X                                        X        X                                                X"+
