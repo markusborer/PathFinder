@@ -10,10 +10,12 @@ public class Main {
 			Window window = new Window(WIDTH, HEIGHT);
 			Labyrinth labyrinth = new Labyrinth(window);
 			labyrinth.initLabyrinth(LABYRINTH_1, WIDTH, HEIGHT);
-			PathFinder pathFinder = new PathFinder(labyrinth);
-			pathFinder.findPath(new PathFinderLogicRandom());
+			//PathFinder pathFinder = new PathFinder(labyrinth);
+			//pathFinder.findPath(new PathFinderLogicRandom());
 			//pathFinder.findPath(new PathFinderLogicHand());
 			//pathFinder.findPath(new PathFinderLogicPledge());
+			PathFinderShortest pathFinder = new PathFinderShortest(labyrinth);
+			pathFinder.findPath();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

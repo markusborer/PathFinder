@@ -72,4 +72,8 @@ public class Labyrinth {
 		window.setTitle(title);
 	}
 
+	void setNotEmpty(Point point) {
+		labyrinth[point.x][point.y] = NOT_EMPTY;
+	}
+
 }
