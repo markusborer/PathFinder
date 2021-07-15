@@ -1,7 +1,5 @@
 package ch.adesso.pathfinder;
 
-import ch.adesso.pathfinder.PathFinderLogic.DIRECTIONS;
-
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,49 +16,33 @@ class PathFinderShortest {
 
 	void findPath() {
 		int steps = 0;
-		DIRECTIONS direction = DIRECTIONS.RIGHT;
-		Point position = new Point(labyrinth.getStart());
-		List<Point> oldPoints = new ArrayList<>();
-		oldPoints.add(position);
+		Ant firstAnt = new Ant(labyrinth);
+		List<Ant> oldAnts = new ArrayList<>();
+		oldAnts.add(firstAnt);
 		boolean finished = false;
 		do {
 			steps++;
 			labyrinth.setTitle("Searching " + steps + " steps");
-
-			List<Point> newPoints = new ArrayList<>();
-			for (Point point : oldPoints) {
-				Point newPoint = new Point(point.x + 1, point.y);
-				if (labyrinth.isEmpty(newPoint)) {
-					labyrinth.paintLine(newPoint);
-					labyrinth.setNotEmpty(newPoint);
-					newPoints.add(newPoint);
-					finished |= newPoint.equals(labyrinth.getEnd());
-				}
-				newPoint = new Point(point.x, point.y + 1);
-				if (labyrinth.isEmpty(newPoint)) {
-					labyrinth.paintLine(newPoint);
-					labyrinth.setNotEmpty(newPoint);
-					newPoints.add(newPoint);
-					finished |= newPoint.equals(labyrinth.getEnd());
-				}
-				newPoint = new Point(point.x - 1, point.y);
-				if (labyrinth.isEmpty(newPoint)) {
-					labyrinth.paintLine(newPoint);
-					labyrinth.setNotEmpty(newPoint);
-					newPoints.add(newPoint);
-					finished |= newPoint.equals(labyrinth.getEnd());
-				}
-				newPoint = new Point(point.x, point.y - 1);
-				if (labyrinth.isEmpty(newPoint)) {
-					labyrinth.paintLine(newPoint);
-					labyrinth.setNotEmpty(newPoint);
-					newPoints.add(newPoint);
-					finished |= newPoint.equals(labyrinth.getEnd());
+			System.out.println("Ants: " + oldAnts.size());
+			List<Ant> newAnts = new ArrayList<>();
+			for (Ant oldAnt : oldAnts) {
+				List<Ant> antsToAdd = oldAnt.goOneStep();
+				newAnts.addAll(antsToAdd);
+				for (Ant antToAdd : antsToAdd) {
+					Point lastPoint = antToAdd.getLastPoint();
+					labyrinth.paintLine(lastPoint);
+					labyrinth.setNotEmpty(lastPoint);
+					boolean isFinished = lastPoint.equals(labyrinth.getEnd());
+					if (isFinished) {
+						List<Point> path = antToAdd.getPath();
+						for (Point point : path) {
+							labyrinth.paintSolutionLine(point);
+						}
+					}
+					finished |= isFinished;
 				}
 			}
-			oldPoints = newPoints;
-
-			labyrinth.paintLine(position);
+			oldAnts = newAnts;
 			try {
 				Thread.sleep(STEP_IN_MILLIS);
 			} catch (InterruptedException e) {

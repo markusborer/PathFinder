@@ -13,6 +13,7 @@ public class Labyrinth {
 	private static final int[] START_COLOR = new int[] { 0x00, 0x00, 0xFF };
 	private static final int[] END_COLOR = new int[] { 0xFF, 0x00, 0x00 };
 	private static final int[] LINE_COLOR = new int[] { 0x00, 0xFF, 0x00 };
+	private static final int[] SOLUTION_LINE_COLOR = new int[] { 0x00, 0x00, 0xFF };
 
 	private static final int EMPTY = 0;
 	private static final int NOT_EMPTY = 1;
@@ -74,6 +75,11 @@ public class Labyrinth {
 
 	void setNotEmpty(Point point) {
 		labyrinth[point.x][point.y] = NOT_EMPTY;
+	}
+
+	public void paintSolutionLine(Point point) {
+		window.setColor(point, Labyrinth.SOLUTION_LINE_COLOR);
+		window.repaint();
 	}
 
 }
