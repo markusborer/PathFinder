@@ -15,56 +15,33 @@ public class Ant {
         path.add(labyrinth.getStart());
     }
 
-    public List<Ant> goOneStep() {
-        ArrayList<Ant> paths = new ArrayList<>();
-        if (isRightFree()) {
-            paths.add(cloneAntWithNewPoint(getRightPoint()));
-        }
-        if (isDownFree()) {
-            paths.add(cloneAntWithNewPoint(getDownPoint()));
-        }
-        if (isUpFree()) {
-            paths.add(cloneAntWithNewPoint(getUpPoint()));
-        }
-        if (isLeftFree()) {
-            paths.add(cloneAntWithNewPoint(getLeftPoint()));
-        }
-        return paths;
+    public Ant(Labyrinth labyrinth, List<Point> path) {
+        this.labyrinth = labyrinth;
+        this.path = path;
+    }
+
+    public List<Point> getPath() {
+        return path;
     }
 
     public Point getLastPoint() {
         return path.get(path.size() - 1);
     }
 
-
-    public List<Point> getPath() {
-        return path;
+    public List<Ant> goOneStep() {
+        ArrayList<Ant> ants = new ArrayList<>();
+        addAntIfPointIsFree(ants, getRightPoint());
+        addAntIfPointIsFree(ants, getDownPoint());
+        addAntIfPointIsFree(ants, getUpPoint());
+        addAntIfPointIsFree(ants, getLeftPoint());
+        return ants;
     }
 
-    private boolean isRightFree() {
-        Point rightPoint = getRightPoint();
-        return labyrinth.isEmpty(rightPoint);
-    }
-
-    private boolean isDownFree() {
-        Point downPoint = getDownPoint();
-        return labyrinth.isEmpty(downPoint);
-    }
-
-    private boolean isUpFree() {
-        Point lastPoint = getLastPoint();
-        Point upPoint = new Point(lastPoint.x, lastPoint.y - 1);
-        return labyrinth.isEmpty(upPoint);
-    }
-
-    private boolean isLeftFree() {
-        Point leftPoint = getLeftPoint();
-        return labyrinth.isEmpty(leftPoint);
-    }
-
-    private Point getUpPoint() {
-        Point lastPoint = getLastPoint();
-        return new Point(lastPoint.x, lastPoint.y - 1);
+    private void addAntIfPointIsFree(ArrayList<Ant> ants, Point point) {
+        boolean isPointFree = labyrinth.isEmpty(point);
+        if (isPointFree) {
+            ants.add(cloneAntWithNewPoint(point));
+        }
     }
 
     private Point getRightPoint() {
@@ -77,16 +54,20 @@ public class Ant {
         return new Point(lastPoint.x, lastPoint.y + 1);
     }
 
+    private Point getUpPoint() {
+        Point lastPoint = getLastPoint();
+        return new Point(lastPoint.x, lastPoint.y - 1);
+    }
+
     private Point getLeftPoint() {
         Point lastPoint = getLastPoint();
         return new Point(lastPoint.x - 1, lastPoint.y);
     }
 
     private Ant cloneAntWithNewPoint(Point point) {
-        Ant newPath = new Ant(labyrinth);
-        newPath.path = new ArrayList<>(this.path);
-        newPath.path.add(point);
-        return newPath;
+        List<Point> newPath = new ArrayList<>(this.path);
+        newPath.add(point);
+        return new Ant(labyrinth, newPath);
     }
 
 }
